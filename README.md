@@ -1,7 +1,6 @@
 # MultiTier-Autoscaling-Application#
 
 ![Infrastructure Diagram](./Diagram.png)
-*Replace `infra-diagram.png` with your actual diagram image file.*
 
 ---
 
