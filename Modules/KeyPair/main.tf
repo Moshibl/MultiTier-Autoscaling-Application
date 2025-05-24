@@ -10,6 +10,6 @@ resource "aws_key_pair" "PublicKey" {
 
 resource "local_file" "PrivateKey" {
   content         = tls_private_key.KeyPair.private_key_pem
-  filename        = var.Key_Name
+  filename        = pathexpand("~/.ssh/${var.Key_Name}")
   file_permission = "0400"
 }

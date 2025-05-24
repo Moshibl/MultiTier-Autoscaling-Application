@@ -14,10 +14,6 @@ output "Backend_SG" {
   value = aws_security_group.Backend_SG.id
 }
 
-output "Master_SG" {
-  value = aws_security_group.Master_SG.id
-}
-
-output "Slave_SG" {
-  value = aws_security_group.Slave_SG.id
+output "Bastion_SG" {
+  value = aws_security_group.Bastion_SG.id
 }

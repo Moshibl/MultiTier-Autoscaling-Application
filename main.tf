@@ -43,24 +43,13 @@ module "KeyPair" {
 # --------------------------------------------------
 
 
-module "Master" {
+module "Bastion" {
   source        = "./Modules/EC2"
   AMI           = var.AMI
-  Instance_Name = var.Master_Name
-  Instance_Type = "t2.micro"
-  Subnet_Id     = module.VPC.PubSub1_ID
-  SG            = module.SecurityGroups.Master_SG
-  Is_Public     = true
-  Key_Name      = var.Key_Name
-}
-
-module "Slave" {
-  source        = "./Modules/EC2"
-  AMI           = var.AMI
-  Instance_Name = var.Slave_Name
+  Instance_Name = var.Bastion_Name
   Instance_Type = var.Instance_Type
-  Subnet_Id     = module.VPC.PrivSub1_ID
-  SG            = module.SecurityGroups.Slave_SG
+  Subnet_Id     = module.VPC.PubSub1_ID
+  SG            = module.SecurityGroups.Bastion_SG
   Is_Public     = true
   Key_Name      = var.Key_Name
 }
@@ -139,18 +128,3 @@ module "Internal_ALB" {
 # --------------------------------------------------
 # END
 # --------------------------------------------------
-
-resource "null_resource" "Master_Startup" {
-  depends_on = [module.ProxyAutoScaling, module.PrivateAutoScaling]
-  triggers = {
-    master_ip = module.Master.EC2_IP
-  }
-  provisioner "local-exec" {
-    command = <<EOT
-      bash ${var.WorkDir}/Ansible/FetchIP.sh
-      echo "Running Ansible..."
-      ANSIBLE_CONFIG=${var.WorkDir}/Ansible/ansible.cfg \
-      ansible-playbook -i ${var.WorkDir}/Ansible/inventory ${var.WorkDir}/Ansible/master-playbook.yml
-    EOT
-  }
-}

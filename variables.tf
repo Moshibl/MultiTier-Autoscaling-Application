@@ -9,22 +9,11 @@ variable "Key_Name" {
   type = string
 }
 
-variable "WorkDir" {
-  type = string
-}
 # --------------------------------------------------
 # Global Vars
 # --------------------------------------------------
 
-variable "Master_Name" {
-  type = string
-}
-
-variable "Slave_Name" {
-  type = string
-}
-
-variable "Jenkins_Type" {
+variable "Bastion_Name" {
   type = string
 }
 

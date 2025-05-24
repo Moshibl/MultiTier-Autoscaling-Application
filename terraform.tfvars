@@ -3,13 +3,10 @@
 # --------------------------------------------------
 region   = "us-east-1"
 Key_Name = "Key"
-WorkDir  = "/home/mohamed/MultiTier-Autoscaling-Application"
 # --------------------------------------------------
 # EC2 Vars
 # --------------------------------------------------
-Master_Name  = "Master"
-Slave_Name   = "Slave"
-Jenkins_Type = "t2.medium"
+Bastion_Name  = "Bastion"
 # --------------------------------------------------
 # VPC Vars
 # --------------------------------------------------
